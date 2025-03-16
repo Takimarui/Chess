@@ -1,0 +1,11 @@
+## Will be implemented:
+- Mechanics of interaction with the board
+- Mechanics of movement
+- 
+
+
+## Was implemented:
+- 
+- 
+- 
+

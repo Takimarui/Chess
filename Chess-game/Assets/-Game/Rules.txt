@@ -1,0 +1,120 @@
+### **Chess Rules**
+
+Chess is a strategy board game in which two players (White and Black) control armies of 16 pieces, aiming to checkmate the opponent’s king.
+
+------
+
+## **1. Piece Setup**
+
+The chessboard consists of **64 squares** (8×8), each with coordinates (e.g., e4).
+
+- White starts on **the 1st and 2nd ranks**.
+- Black starts on **the 7th and 8th ranks**.
+
+**Piece Placement (from a1 to h1 for White, a8 to h8 for Black):**
+
+- **Rooks (R)** on a1, h1 (a8, h8).
+- **Knights (N)** on b1, g1 (b8, g8).
+- **Bishops (B)** on c1, f1 (c8, f8).
+- **Queen (Q)** on d1 (d8). **The queen stands on her color** (White on a white square, Black on a black square).
+- **King (K)** on e1 (e8).
+- **Pawns (P)** fill the 2nd and 7th ranks.
+
+------
+
+## **2. How Pieces Move**
+
+### **2.1. Pawn (P)**
+
+- Moves **1 square forward** (or 2 squares forward from its starting position).
+- Captures **diagonally** by moving 1 square forward.
+- Special move: **En passant** – if a pawn moves 2 squares forward and lands beside an opponent’s pawn, the opponent can capture it as if it moved only 1 square forward.
+- Reaching the last rank allows **promotion** to any piece (except the king).
+
+### **2.2. Rook (R)**
+
+- Moves **vertically or horizontally** any number of squares.
+- Cannot jump over pieces.
+
+### **2.3. Knight (N)**
+
+- Moves in an **"L" shape** (2 squares in one direction, then 1 square perpendicular).
+- **The only piece** that can **jump over** others.
+
+### **2.4. Bishop (B)**
+
+- Moves **diagonally** any number of squares.
+- **Cannot jump over** pieces.
+- One bishop stays on **light squares**, the other on **dark squares**.
+
+### **2.5. Queen (Q)**
+
+- Moves **like a rook and a bishop combined** (vertically, horizontally, or diagonally).
+- The most powerful piece on the board.
+
+### **2.6. King (K)**
+
+- Moves **1 square in any direction**.
+- **Castling** – a special move with the rook (explained below).
+
+------
+
+## **3. Special Rules**
+
+### **3.1. Check**
+
+- When the king is attacked, it is in **check**.
+- The player must escape check by:
+  1. Moving the king.
+  2. Blocking with another piece.
+  3. Capturing the attacking piece.
+
+### **3.2. Checkmate**
+
+- If check **cannot be escaped**, it is **checkmate** – the game ends.
+
+### **3.3. Stalemate**
+
+- If a player has **no legal moves**, but their king is **not in check**, it is **stalemate** – a draw.
+
+### **3.4. Castling**
+
+- The king and rook swap places under these conditions:
+  - Neither the king nor the rook **has moved before**.
+  - There are **no pieces between them**.
+  - The king **is not in check** and **does not pass through an attacked square**.
+- Types of castling:
+  - **Kingside castling** – the king moves 2 squares to the right, and the rook moves to its left side.
+  - **Queenside castling** – the king moves 2 squares to the left, and the rook moves to its right side.
+
+### **3.5. En Passant**
+
+- If a pawn moves **2 squares forward**, and an opponent’s pawn is beside it, the opponent can **capture it** as if it had moved only 1 square.
+
+### **3.6. Pawn Promotion**
+
+- A pawn that reaches **the last rank** can be **promoted** to any piece except the king (usually a queen).
+
+------
+
+## **4. How the Game Ends**
+
+### **4.1. Victory**
+
+- **Checkmate** – if the opponent’s king is trapped.
+- **Resignation** – a player can surrender at any time.
+- **Time runs out** – in timed games, a player loses if their clock reaches zero.
+
+### **4.2. Draw**
+
+- **Stalemate** – no legal moves, but the king is **not in check**.
+- **Threefold repetition** – the same position occurs **three times**.
+- **50-move rule** – if **no captures or pawn moves** occur in **50 moves**, the game is drawn.
+- **Insufficient material** – if neither player has **enough pieces to checkmate** (e.g., king vs. king and knight).
+
+------
+
+### **5. Who Moves First?**
+
+- **White always moves first**.
+- Players take turns after that.
