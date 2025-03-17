@@ -1,16 +1,11 @@
 using UnityEngine;
 
-public class Rook : MonoBehaviour
+public class Rook : ChessPiece
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    public Rook(string color, int x, int y) : base(color, x, y) { }
 
-    // Update is called once per frame
-    void Update()
+    public override bool CanMove(int targetX, int targetY)
     {
-        
+        return false;
     }
 }

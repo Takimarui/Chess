@@ -1,16 +1,11 @@
 using UnityEngine;
 
-public class Queen : MonoBehaviour
+public class Queen : ChessPiece
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    public Queen(string color, int x, int y) : base(color, x, y) { }
 
-    // Update is called once per frame
-    void Update()
+    public override bool CanMove(int targetX, int targetY)
     {
-        
+        return false;
     }
 }
