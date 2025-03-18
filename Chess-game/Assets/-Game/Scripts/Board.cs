@@ -30,12 +30,12 @@ class Board
     {
         switch (type)
         {
-            case "Pawn": return new Pawn(color, x, y);
-            case "Rook": return new Rook(color, x, y);
-            case "Queen": return new Queen(color, x, y);
-            case "King": return new King(color, x, y);
-            case "Knight": return new Knight(color, x, y);
-            case "Bishop": return new Bishop(color, x, y);
+            case "Pawn": return new Pawn(color, x, y, true);
+            case "Rook": return new Rook(color, x, y, true);
+            case "Queen": return new Queen(color, x, y, true);
+            case "King": return new King(color, x, y, true);
+            case "Knight": return new Knight(color, x, y, true);
+            case "Bishop": return new Bishop(color, x, y, true);
             default: return null;
         }
     }

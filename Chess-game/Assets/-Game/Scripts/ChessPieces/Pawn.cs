@@ -1,11 +1,37 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Pawn : ChessPiece
 {
-    public Pawn(string color, int x, int y) : base(color, x, y) { }
+    public bool IsFirstMove { get; private set; } = true;
 
-    public override bool CanMove(int targetX, int targetY)
+    public Pawn(string color, int x, int y, bool activated) : base(color, x, y, activated) { }
+
+    public override bool CanMove(int targetX, int targetY, BoardManager board)
     {
-        return false;
+        int direction = Color == "White" ? 1 : -1;
+
+        if (IsFirstMove)
+        {
+            if (targetX == X + 2 * direction && targetY == Y)
+            {
+                if (board.IsCellEmpty(targetX, targetY) && board.IsCellEmpty(X + direction, Y))
+                {
+                    IsFirstMove = false;
+                    return true;
+                }
+            }
+        }
+
+        if (targetX == X + direction && targetY == Y)
+        {
+            return board.IsCellEmpty(targetX, targetY);
+        }
+
+        if (targetX == X + direction && (targetY == Y + 1 || targetY == Y - 1))
+        {
+            return !board.IsCellEmpty(targetX, targetY) && board.GetPieceColor(targetX, targetY) != Color;
+        }
+
+        return true;
     }
 }
