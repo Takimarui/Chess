@@ -1,20 +1,24 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 class Board
 {
     public ChessPiece[,] Cells = new ChessPiece[8, 8];
+    public GameObject[] whitePrefabs;
+    public GameObject[] blackPrefabs;
 
-    public Board()
+    public Board(GameObject[] whitePrefabs, GameObject[] blackPrefabs)
     {
         string[] backRow = { "Rook", "Knight", "Bishop", "Queen", "King", "Bishop", "Knight", "Rook" };
+        this.whitePrefabs = whitePrefabs;
+        this.blackPrefabs = blackPrefabs;
 
         for (int i = 0; i < 8; i++)
         {
-            Cells[7, i] = CreatePiece(backRow[i], "White", 7, i);
-            Cells[6, i] = CreatePiece("Pawn", "White", 6, i);
+            Cells[7, i] = CreatePiece(backRow[i], "White", i, 7);
+            Cells[6, i] = CreatePiece("Pawn", "White", i, 6);
 
-            Cells[1, i] = CreatePiece("Pawn", "Black", 1, i);
-            Cells[0, i] = CreatePiece(backRow[i], "Black", 0, i);
+            Cells[1, i] = CreatePiece("Pawn", "Black", i, 1);
+            Cells[0, i] = CreatePiece(backRow[i], "Black", i, 0);
         }
 
         for (int i = 2; i < 6; i++)
@@ -28,15 +32,18 @@ class Board
 
     public ChessPiece CreatePiece(string type, string color, int x, int y)
     {
+        ChessPiece piece = null;
+
         switch (type)
         {
-            case "Pawn": return new Pawn(color, x, y, true);
-            case "Rook": return new Rook(color, x, y, true);
-            case "Queen": return new Queen(color, x, y, true);
-            case "King": return new King(color, x, y, true);
-            case "Knight": return new Knight(color, x, y, true);
-            case "Bishop": return new Bishop(color, x, y, true);
-            default: return null;
+            case "Pawn": piece = new Pawn(color, x, y, true); break;
+            case "Rook": piece = new Rook(color, x, y, true); break;
+            case "Queen": piece = new Queen(color, x, y, true); break;
+            case "King": piece = new King(color, x, y, true); break;
+            case "Knight": piece = new Knight(color, x, y, true); break;
+            case "Bishop": piece = new Bishop(color, x, y, true); break;
         }
+
+        return piece;
     }
 }

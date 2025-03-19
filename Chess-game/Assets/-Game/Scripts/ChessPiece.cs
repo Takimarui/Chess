@@ -7,6 +7,8 @@ public abstract class ChessPiece
     public int Y { get; set; }
     public bool Activated { get; set; }
 
+    public GameObject pieceObject;
+
     public ChessPiece(string color, int x, int y, bool activated)
     {
         Color = color;

@@ -8,30 +8,37 @@ public class Pawn : ChessPiece
 
     public override bool CanMove(int targetX, int targetY, BoardManager board)
     {
-        int direction = Color == "White" ? 1 : -1;
+        Debug.Log($"Into Pawn : {Color} : {X};{Y}");
+
+        int direction = Color == "White" ? -1 : 1;
 
         if (IsFirstMove)
         {
-            if (targetX == X + 2 * direction && targetY == Y)
+            if (targetX == X && targetY == Y + 2 * direction)
             {
-                if (board.IsCellEmpty(targetX, targetY) && board.IsCellEmpty(X + direction, Y))
+                if (board.IsCellEmpty(targetX, targetY) && board.IsCellEmpty(X, Y + direction))
                 {
                     IsFirstMove = false;
                     return true;
                 }
             }
         }
-
-        if (targetX == X + direction && targetY == Y)
+        
+        if (targetX == X && targetY == Y + direction)
         {
-            return board.IsCellEmpty(targetX, targetY);
+            if (board.IsCellEmpty(targetX, targetY))
+            {
+                IsFirstMove = false;
+                return true;
+            }
+            
         }
 
-        if (targetX == X + direction && (targetY == Y + 1 || targetY == Y - 1))
+        if ((targetX == X + 1 || targetX == X - 1) && targetY == Y + direction)
         {
             return !board.IsCellEmpty(targetX, targetY) && board.GetPieceColor(targetX, targetY) != Color;
         }
 
-        return true;
+        return false;
     }
 }
