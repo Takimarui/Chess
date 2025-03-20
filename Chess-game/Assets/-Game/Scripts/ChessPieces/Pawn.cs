@@ -8,8 +8,6 @@ public class Pawn : ChessPiece
 
     public override bool CanMove(int targetX, int targetY, BoardManager board)
     {
-        Debug.Log($"Into Pawn : {Color} : {X};{Y}");
-
         int direction = Color == "White" ? -1 : 1;
 
         if (IsFirstMove)

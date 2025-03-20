@@ -1,11 +1,17 @@
-## Will be implemented:
-- Mechanics of interaction with the board
-- Mechanics of movement
-- 
+﻿## Will be implemented:
+- The logic of victory
+- Sounds
 
+- Multiplayer
 
 ## Was implemented:
-- 
-- 
-- 
+- Mechanics of interaction with the board.
+- Mechanics of movement:
+	- Pawn ("En Passant" does not work. "Pawn Promotion" does not work too.)
+	- King (Сan't castling. Сan move on beaten squares.)
+	- Rook
+	- Bishop
+	- Queen
+	- Knight
+- Restart game.
 

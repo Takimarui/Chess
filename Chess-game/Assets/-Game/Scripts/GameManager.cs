@@ -2,15 +2,23 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public static GameManager Instance { get; private set; }
+    public bool IsWhiteTurn { get; private set; } = true;
+
+    private void Awake()
     {
-        
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+    public void NextTurn()
+    {
+        IsWhiteTurn = !IsWhiteTurn;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
