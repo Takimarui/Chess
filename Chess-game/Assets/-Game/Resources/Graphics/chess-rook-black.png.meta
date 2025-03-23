@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      chess-rook-black_0: 4029591404209254226
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

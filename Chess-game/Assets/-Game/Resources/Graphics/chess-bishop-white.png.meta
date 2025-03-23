@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      chess-bishop-white_0: -1302254948583161774
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

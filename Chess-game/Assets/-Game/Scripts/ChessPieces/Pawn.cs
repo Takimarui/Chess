@@ -34,6 +34,7 @@ public class Pawn : ChessPiece
 
         if ((targetX == X + 1 || targetX == X - 1) && targetY == Y + direction)
         {
+            IsFirstMove = false;
             return !board.IsCellEmpty(targetX, targetY) && board.GetPieceColor(targetX, targetY) != Color;
         }
 

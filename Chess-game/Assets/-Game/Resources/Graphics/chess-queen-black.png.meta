@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      chess-queen-black_0: 6941264430462745087
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
