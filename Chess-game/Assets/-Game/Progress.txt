@@ -2,7 +2,6 @@
 - The logic of victory
 - Sounds
 
-- Multiplayer
 
 ## Was implemented:
 - Mechanics of interaction with the board.
@@ -14,4 +13,5 @@
 	- Queen
 	- Knight
 - Restart game.
+- Multiplayer
 

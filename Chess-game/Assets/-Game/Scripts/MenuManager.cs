@@ -34,6 +34,8 @@ public class MenuManager : MonoBehaviourPunCallbacks
         roomCode = System.Guid.NewGuid().ToString().Substring(0, 6);
         roomCodeDisplay.text = roomCode;
         Debug.Log(roomCode);
+
+        GUIUtility.systemCopyBuffer = roomCode;
     }
 
     private void CreateRoom()

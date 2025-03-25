@@ -1,8 +1,11 @@
-﻿using UnityEngine;
+﻿using Photon.Pun;
+using UnityEngine;
 using static UnityEngine.Rendering.DebugUI.Table;
 
-public class BoardManager : MonoBehaviour
+public class BoardManager : MonoBehaviourPun
 {
+    [SerializeField] private PhotonView _view;
+
     private Board _board;
     private ChessPiece _selectedPiece;
 
@@ -13,11 +16,16 @@ public class BoardManager : MonoBehaviour
     private void Start()
     {
         _board = new Board(whitePrefabs, blackPrefabs);
-        DrawBoard();
+        if (PhotonNetwork.IsMasterClient)
+        {
+            DrawBoard();
+        }
     }
 
     private void Update()
     {
+        if (_board == null) return;
+
         if (Input.GetMouseButtonDown(1))
         {
             ResetBoard();
@@ -51,32 +59,13 @@ public class BoardManager : MonoBehaviour
             {
                 if (_selectedPiece.CanMove(x, y, this))
                 {
-                MovePiece(_selectedPiece, x, y);
-                GameManager.Instance.NextTurn();
+                    photonView.RPC("RpcMovePiece", RpcTarget.All, _selectedPiece.X, _selectedPiece.Y, x, y);
+                    GameManager.Instance.NextTurn();
                 }
+                UpdatePieceTransparency(_selectedPiece, false);
                 _selectedPiece = null;
-                UpdatePieceTransparency(null);
             }
         }
-    }
-
-    public void MovePiece(ChessPiece piece, int targetX, int targetY)
-    {
-        ChessPiece targetPiece = _board.Cells[targetY, targetX];
-
-        if (targetPiece != null)
-        {
-            Destroy(targetPiece.pieceObject);
-            _board.Cells[targetY, targetX] = null;
-        }
-
-        _board.Cells[piece.Y, piece.X] = null;
-        _board.Cells[targetY, targetX] = piece;
-
-        piece.X = targetX;
-        piece.Y = targetY;
-
-        piece.pieceObject.transform.position = new Vector3(piece.X, piece.Y, 0);
     }
 
     public bool IsCellEmpty(int x, int y)
@@ -150,35 +139,47 @@ public class BoardManager : MonoBehaviour
         for (int i = 0; i < 8; i++)
         {
             for (int j = 0; j < 8; j++)
-            { 
+            {
                 ChessPiece piece = _board.Cells[i, j];
-                if (piece != null)
+                if (piece != null && piece.pieceObject == null)
                 {
-                    GameObject pieceObject = GetPrefab(piece);
-
-                    if (pieceObject != null && piece.pieceObject == null)
+                    GameObject prefab = GetPrefab(piece);
+                    if (prefab != null)
                     {
-                        piece.pieceObject = Instantiate(pieceObject, new Vector3(j, i, 0), Quaternion.identity);
+                        piece.pieceObject = PhotonNetwork.Instantiate(
+                            prefab.name,
+                            new Vector3(j, i, 0),
+                            Quaternion.identity,
+                            0
+                        );
                         piece.pieceObject.tag = "ChessPiece";
+
+                        var sync = piece.pieceObject.GetComponent<ChessPieceSync>();
+                        if (sync == null)
+                        {
+                            sync = piece.pieceObject.AddComponent<ChessPieceSync>();
+                        }
+                        sync.SyncPosition(j, i);
                     }
                 }
             }
         }
     }
 
-    public void UpdatePieceTransparency(ChessPiece selectedPiece)
+
+    public void UpdatePieceTransparency(ChessPiece selectedPiece, bool visibility = true)
     {
-        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("ChessPiece"))
+        if (selectedPiece == null || selectedPiece.pieceObject == null) return;
+
+        SpriteRenderer renderer = selectedPiece.pieceObject.GetComponent<SpriteRenderer>();
+        if (renderer != null)
         {
-            SpriteRenderer renderer = obj.GetComponent<SpriteRenderer>();
-            if (renderer != null)
-            {
-                Color color = renderer.color;
-                color.a = (selectedPiece != null && obj != selectedPiece.pieceObject) ? 0.9f : 1f;
-                renderer.color = color;
-            }
+            Color color = renderer.color;
+            color.a = visibility ? 0.8f : 1f;
+            renderer.color = color;
         }
     }
+
 
     private void ResetBoard()
     {
@@ -208,6 +209,33 @@ public class BoardManager : MonoBehaviour
             case Queen _: return 4;
             case King _: return 5;
             default: return -1;
+        }
+    }
+
+    [PunRPC]
+    private void RpcMovePiece(int startX, int startY, int targetX, int targetY)
+    {
+        ChessPiece piece = _board.Cells[startY, startX];
+        if (piece == null) return;
+
+        ChessPiece targetPiece = _board.Cells[targetY, targetX];
+        if (targetPiece != null && targetPiece.pieceObject != null)
+        {
+            PhotonNetwork.Destroy(targetPiece.pieceObject);
+        }
+
+        _board.Cells[startY, startX] = null;
+        _board.Cells[targetY, targetX] = piece;
+        piece.X = targetX;
+        piece.Y = targetY;
+
+        if (piece.pieceObject != null)
+        {
+            var sync = piece.pieceObject.GetComponent<ChessPieceSync>();
+            if (sync != null)
+            {
+                sync.SyncPosition(targetX, targetY);
+            }
         }
     }
 }
