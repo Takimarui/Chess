@@ -18,4 +18,9 @@ public abstract class ChessPiece
     }
 
     public abstract bool CanMove(int targetX, int targetY, BoardManager board);
+
+    public bool CanBeMoved()
+    {
+        return GameManager.Instance.CanMovePiece(this);
+    }
 }

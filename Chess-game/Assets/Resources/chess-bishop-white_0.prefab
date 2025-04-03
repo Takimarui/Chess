@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -1859032533495765738}
   - component: {fileID: 5029058016922168377}
   - component: {fileID: -119470244311903852}
+  - component: {fileID: 270987921818690959}
   m_Layer: 0
   m_Name: chess-bishop-white_0
   m_TagString: Untagged
@@ -141,3 +142,15 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 1
   m_UseLocal: 1
+--- !u!114 &270987921818690959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5331552480484580999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc9507cbe7b0af548844bb82ef059d45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

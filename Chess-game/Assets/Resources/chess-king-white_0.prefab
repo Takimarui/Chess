@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1009061812526977926}
   - component: {fileID: 6085414350242032227}
   - component: {fileID: -5489322772839833966}
+  - component: {fileID: 6215393972581898086}
   m_Layer: 0
   m_Name: chess-king-white_0
   m_TagString: Untagged
@@ -140,3 +141,15 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 1
   m_UseLocal: 1
+--- !u!114 &6215393972581898086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2068118915747703426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc9507cbe7b0af548844bb82ef059d45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

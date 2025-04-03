@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8754536819788150814}
   - component: {fileID: -1580292146744839305}
   - component: {fileID: -1625226505075895061}
+  - component: {fileID: 3503510647179796480}
   m_Layer: 0
   m_Name: chess-rook-black_0
   m_TagString: Untagged
@@ -140,3 +141,15 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 1
   m_UseLocal: 1
+--- !u!114 &3503510647179796480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3455375873681600505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc9507cbe7b0af548844bb82ef059d45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

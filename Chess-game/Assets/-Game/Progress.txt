@@ -1,17 +1,21 @@
-﻿## Will be implemented:
-- The logic of victory
-- Sounds
-
+﻿## Not implemented:
+- **Undo** - implement a proper undo system.
+- **Score Tracking** - implement a scoring system based on captured pieces.
 
 ## Was implemented:
-- Mechanics of interaction with the board.
-- Mechanics of movement:
+- **Mechanics of interaction with the board.**
+- **Mechanics of movement:**
 	- Pawn ("En Passant" does not work. "Pawn Promotion" does not work too.)
 	- King (Сan't castling. Сan move on beaten squares.)
 	- Rook
 	- Bishop
 	- Queen
 	- Knight
-- Restart game.
-- Multiplayer
-
+- **Restart game.**
+- **Multiplayer**
+- **Music and sound effects** – Add sounds for piece movement, captures, check, checkmate, and background music. 
+- **Correct board orientation** – Ensure proper board display for both white and black players. 
+- **Pawn promotion** – Allow players to choose a piece when a pawn reaches the last rank.  
+- **Victory conditions** – Implement logic for checkmate, stalemate, and determining the winner. 
+- **Castling mechanics** – Implement castling for the king and rook according to chess rules. 
+- **Show valid moves for the second player** – Display available moves for both players.  

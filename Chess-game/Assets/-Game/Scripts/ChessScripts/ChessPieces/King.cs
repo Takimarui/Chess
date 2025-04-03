@@ -8,9 +8,20 @@ public class King : ChessPiece
 
     public override bool CanMove(int targetX, int targetY, BoardManager board)
     {
-        if (IsFirstMove)
+        if (IsFirstMove && targetY == Y && (targetX == X + 2 || targetX == X - 2))
         {
-            //castling
+            int rookX = (targetX > X) ? X + 3 : X - 4;
+
+            ChessPiece rook = board.GetPieceAt(rookX, Y);
+
+            if (rook is Rook && Color ==  rook.Color && ((Rook)rook).IsFirstMove)
+            {
+                if (board.IsPathClear(X, Y, rookX, targetY))
+                {
+                    IsFirstMove = false;
+                    return true;
+                }
+            }
         }
 
         if ((targetX == X + 1 || targetX == X - 1 || targetX == X) &&

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3654525683940498882}
   - component: {fileID: 4914534830987457989}
   - component: {fileID: 6152935261749100950}
+  - component: {fileID: -2193198746639841575}
   m_Layer: 0
   m_Name: chess-bishop-black_0
   m_TagString: Untagged
@@ -141,3 +142,15 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 1
   m_UseLocal: 1
+--- !u!114 &-2193198746639841575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1274674120291134728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc9507cbe7b0af548844bb82ef059d45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

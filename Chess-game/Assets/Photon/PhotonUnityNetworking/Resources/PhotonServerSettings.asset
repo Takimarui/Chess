@@ -47,6 +47,10 @@ MonoBehaviour:
   - RpcUpdatePieceTransparency
   - RpcHighlightPiece
   - RpcResetHighlight
+  - RpcPromotePawn
+  - RpcAssignPiece
+  - RpcDestroyPiece
+  - RpcMoveRook
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

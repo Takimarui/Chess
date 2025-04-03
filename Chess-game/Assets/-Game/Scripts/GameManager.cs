@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviourPun
     public static GameManager Instance;
 
     private bool isWhiteTurn = true;
+    private string playerColor;
 
     private void Awake()
     {
@@ -20,11 +21,37 @@ public class GameManager : MonoBehaviourPun
         }
     }
 
-    public void EndTurn()
+    private void Start()
+    {
+        playerColor = PlayerPrefs.GetString("PlayerColor", "White");
+        SetupBoardView();
+    }
+    private void SetupBoardView()
+    {
+        if (playerColor == "Black")
+        {
+            RotateBoard();
+        }
+    }
+    private void RotateBoard()
+    {
+        GameObject board = GameObject.Find("ChessBoard");
+        if (board != null)
+        {
+            board.transform.Rotate(0, 180, 0);
+        }
+    }
+
+    private void EndTurn()
     {
         isWhiteTurn = !isWhiteTurn;
         photonView.RPC("RpcEndTurn", RpcTarget.All, isWhiteTurn);
     }
+    public void NextTurn()
+    {
+        EndTurn();
+    }
+    public bool IsWhiteTurn => isWhiteTurn;
 
     [PunRPC]
     private void RpcEndTurn(bool isWhiteTurn)
@@ -32,11 +59,9 @@ public class GameManager : MonoBehaviourPun
         this.isWhiteTurn = isWhiteTurn;
         Debug.Log("End Turn, isWhiteTurn: " + isWhiteTurn);
     }
-
-    public void NextTurn()
+    public bool CanMovePiece(ChessPiece piece)
     {
-        EndTurn();
+        return piece.Color == playerColor &&
+               ((isWhiteTurn && piece.Color == "White") || (!isWhiteTurn && piece.Color == "Black"));
     }
-
-    public bool IsWhiteTurn => isWhiteTurn;
 }

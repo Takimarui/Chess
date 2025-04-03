@@ -3,19 +3,29 @@ using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
 
 public class MenuManager : MonoBehaviourPunCallbacks
 {
     [SerializeField] private string _version = "1";
 
-    [SerializeField] private TMP_InputField roomCodeInputField;
-    [SerializeField] private TMP_Text roomCodeDisplay;
-    [SerializeField] private Button createRoomButton, joinRoomButton, generateCodeButton;
+    [SerializeField] private MusicManager _musicManager;
+
+    [SerializeField] private TMP_InputField _roomCodeInputField;
+    [SerializeField] private TMP_Text _roomCodeDisplay;
+    [SerializeField] private Button _createRoomButton, _joinRoomButton, _generateCodeButton;
+
+    [SerializeField] private GameObject _loadingMenu;
+    [SerializeField] private TMP_Text _loadingText;
 
     private string roomCode;
+    private string baseText = "Loading";
 
     private void Awake()
     {
+        _loadingMenu.SetActive(true);
+        StartCoroutine(AnimateDots());
+
         AppSettings appSettings = new AppSettings
         {
             AppVersion = _version,
@@ -24,15 +34,26 @@ public class MenuManager : MonoBehaviourPunCallbacks
 
         PhotonNetwork.ConnectUsingSettings(appSettings);
 
-        createRoomButton.onClick.AddListener(CreateRoom);
-        joinRoomButton.onClick.AddListener(JoinRoom);
-        generateCodeButton.onClick.AddListener(GenerateCode);
+        _createRoomButton.onClick.AddListener(CreateRoom);
+        _joinRoomButton.onClick.AddListener(JoinRoom);
+        _generateCodeButton.onClick.AddListener(GenerateCode);
+    }
+    IEnumerator AnimateDots()
+    {
+        int dotCount = 0;
+
+        while (true)
+        {
+            _loadingText.text = baseText + new string('.', dotCount);
+            dotCount = (dotCount + 1) % 4;
+            yield return new WaitForSeconds(0.5f);
+        }
     }
 
     private void GenerateCode()
     {
         roomCode = System.Guid.NewGuid().ToString().Substring(0, 6);
-        roomCodeDisplay.text = roomCode;
+        _roomCodeDisplay.text = roomCode;
         Debug.Log(roomCode);
 
         GUIUtility.systemCopyBuffer = roomCode;
@@ -48,7 +69,16 @@ public class MenuManager : MonoBehaviourPunCallbacks
 
         if (PhotonNetwork.IsConnectedAndReady)
         {
-            PhotonNetwork.CreateRoom(roomCode, new RoomOptions { MaxPlayers = 2 }, null);
+            _musicManager.StartFadeOut();
+
+            string hostColor = Random.value > 0.5f ? "White" : "Black";
+
+            RoomOptions options = new RoomOptions();
+            options.MaxPlayers = 2;
+            options.CustomRoomProperties = new ExitGames.Client.Photon.Hashtable { { "HostColor", hostColor } };
+            options.CustomRoomPropertiesForLobby = new string[] { "HostColor" };
+
+            PhotonNetwork.CreateRoom(roomCode, options, null);
         }
         else
         {
@@ -58,7 +88,7 @@ public class MenuManager : MonoBehaviourPunCallbacks
 
     private void JoinRoom()
     {
-        string inputCode = roomCodeInputField.text;
+        string inputCode = _roomCodeInputField.text;
         if (string.IsNullOrEmpty(inputCode))
         {
             Debug.LogError("Room code is empty!");
@@ -67,6 +97,7 @@ public class MenuManager : MonoBehaviourPunCallbacks
 
         if (PhotonNetwork.IsConnectedAndReady)
         {
+            _musicManager.StartFadeOut();
             PhotonNetwork.JoinRoom(inputCode);
         }
         else
@@ -77,6 +108,7 @@ public class MenuManager : MonoBehaviourPunCallbacks
 
     public override void OnConnectedToMaster()
     {
+        _loadingMenu.SetActive(false);
         PhotonNetwork.JoinLobby(TypedLobby.Default);
         Debug.Log("Connected to Master Server. Ready to create or join rooms.");
     }
@@ -84,6 +116,11 @@ public class MenuManager : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         Debug.Log("Joined room: " + PhotonNetwork.CurrentRoom.Name);
+
+        string hostColor = (string)PhotonNetwork.CurrentRoom.CustomProperties["HostColor"];
+        string playerColor = PhotonNetwork.IsMasterClient ? hostColor : (hostColor == "White" ? "Black" : "White");
+        PlayerPrefs.SetString("PlayerColor", playerColor);
+
         PhotonNetwork.LoadLevel("GameScene");
     }
 

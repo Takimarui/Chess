@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -2302262072321012663}
   - component: {fileID: -5945463876906173942}
   - component: {fileID: -4668443170865219674}
+  - component: {fileID: 7392728698796966249}
   m_Layer: 0
   m_Name: chess-knight-black_0
   m_TagString: Untagged
@@ -140,3 +141,15 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 1
   m_UseLocal: 1
+--- !u!114 &7392728698796966249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7209850471636609505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc9507cbe7b0af548844bb82ef059d45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

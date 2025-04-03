@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6194417772951795355}
   - component: {fileID: -4985417462940868327}
   - component: {fileID: 3470497737544827735}
+  - component: {fileID: 8972475506087313346}
   m_Layer: 0
   m_Name: chess-rook-white_0
   m_TagString: Untagged
@@ -140,3 +141,15 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 1
   m_UseLocal: 1
+--- !u!114 &8972475506087313346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2075247579678798248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc9507cbe7b0af548844bb82ef059d45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
